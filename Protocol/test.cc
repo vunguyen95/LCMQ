@@ -4,9 +4,14 @@
 #include<boost/dynamic_bitset.hpp>
 
 using namespace std;
-int scalar_product(const dbitset& a, const dbitset b){
+inline int scalar_product(const dbitset& a, const dbitset b){
     auto bitwise_and = a & b;
     return bitwise_and.count();
+}
+
+dbitset right_shift(const dbitset& bits, const size_t& i){
+    auto temp = bits;
+    return (temp >> i) | (temp << (bits.size() - i));
 }
 
 
@@ -18,6 +23,9 @@ int main(){
     cout << scalar_product(test1, test2) << endl;
     cout << test2 << endl;
     
-    //cout << test2.rotate_right(1) << endl;;
-    cout << test2 << endl;
+    cout << right_shift(test2, 2) << endl;
+    dbitset challenge(10, 0);
+    auto pair = lcmqt.response(challenge);
+    cout << pair.first << endl;
+    cout << pair.second << endl;
 }

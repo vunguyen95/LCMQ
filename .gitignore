@@ -1,4 +1,4 @@
 Protocol/build
 Protocol/test
 **/*.pyc
-
+**/.vscode

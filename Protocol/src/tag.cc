@@ -38,3 +38,24 @@ void Tag::see_params(){
     cout << this-> k2 << endl;
     cout << this-> k2.count();
 }
+
+pair<dbitset, dbitset> Tag::response(const dbitset& challenge){
+    random_device rd;
+    mt19937 gen(rd());
+    bernoulli_distribution uniform(0.5);
+    bernoulli_distribution noise_rate(this-> eta);
+    dbitset v(this-> n, 0);
+    dbitset b(this-> m, 0);
+    //assert(v.size() == n);
+    for(auto i = 0; i < v.size(); i++){
+        v[i] = noise_rate(gen);
+    }
+    while(b.none() == 1 || b.all() == 1){
+        for(auto i = 0; i < b.size(); i++){
+            b[i] = uniform(gen);
+        }
+    }
+    dbitset y(this-> n, 0);
+    
+    return pair<dbitset, dbitset>(b,v);
+}
